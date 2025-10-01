@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Wayne SecSystem</title>
+</head>
+<body>
+
+    <main>
+        <div id="container">
+            <div id="containerLogin">
+                <h1>Wayne SecSystem</h1>
+                <button class="tech-btn" onclick="openModalLogin()">
+                    <span class="icon">login</span>
+                    Login
+                </button>
+            </div>
+
+            <div id="modalLogin">
+                <form action="#">
+                    <label for="emailLogin">User/E-mail</label>
+                    <div class="inputIcon">
+                        <span class="iconLogin">person</span>
+                        <input type="text" id="emailLogin" placeholder="User / E-mail"/>
+                    </div>
+                    
+                    <label for="passLogin">Password</label>
+                    <div class="inputIcon">
+                        <span class="iconLogin">password</span>
+                        <input type="password" id="passLogin" placeholder="Password"/>
+                    </div>
+
+                    <div id="loginBtn">
+                        <button class="tech-btn" type="submit" onclick="systemLogin()">
+                            <span class="icon">login</span>
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="modalErrorEmptyLogin"></div>
+
+        </div>
+    </main>
+
+    
+    <script src="js/script.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
