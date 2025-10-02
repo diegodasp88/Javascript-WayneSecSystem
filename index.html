@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
@@ -13,7 +14,8 @@
 <body>
 
     <main>
-        <div id="container">
+        <!-- Login Screen: START -->
+        <section id="container">
             <div id="containerLogin">
                 <h1>Wayne SecSystem</h1>
                 <button class="tech-btn" onclick="openModalLogin()">
@@ -21,13 +23,12 @@
                     Login
                 </button>
             </div>
-
             <div id="modalLogin">
                 <form action="#">
-                    <label for="emailLogin">User/E-mail</label>
+                    <label for="emailLogin">E-mail</label>
                     <div class="inputIcon">
-                        <span class="iconLogin">person</span>
-                        <input type="text" id="emailLogin" placeholder="User / E-mail"/>
+                        <span class="iconLogin">email</span>
+                        <input type="text" id="emailLogin" placeholder="E-mail"/>
                     </div>
                     
                     <label for="passLogin">Password</label>
@@ -44,10 +45,73 @@
                     </div>
                 </form>
             </div>
+            <div class="modalErrorLogin" id="modalErrorEmptyLogin"></div>
+            <div class="modalErrorLogin" id="modalErrorLogin"></div>
+        </section>
+        <!-- Login Screen: END -->
 
-            <div id="modalErrorEmptyLogin"></div>
+        <!-- Admin Screen: START -->
+        <section id="adminDashboard">
+            <div id="dashboard">
+                <header>
+                    <h2>Wayner SecSystem</h2>
+                    <div id="userLogged">
+                        <p><span class="icon">person</span><strong>User: </strong>Admin</p>
+                        <button 
+                            class="tech-btn"
+                            id="logoutBtn" 
+                            style="padding: 5px 15px; font-size: 14px;"
+                            onclick="logoutAdminDashboard()">
+                            <span class="icon">logout</span>
+                            Logout
+                        </button>
+                    </div>
+                </header>
+                    
+                <nav>
+                    <div id="menuContainer">
+                        <button 
+                            class="tech-btn"
+                            id="logoutBtn" 
+                            style="padding: 5px 15px; font-size: 14px;"
+                            onclick="showSection('dashboard')">
+                            <span class="icon">dashboard</span>
+                            Dashboard
+                        </button>
+                        <button 
+                            class="tech-btn"
+                            id="logoutBtn" 
+                            style="padding: 5px 15px; font-size: 14px;"
+                            onclick="showSection('users')">
+                            <span class="icon">people</span>
+                            Users
+                        </button>
+                        <button 
+                            class="tech-btn"
+                            id="logoutBtn" 
+                            style="padding: 5px 15px; font-size: 14px;"
+                            onclick="showSection('inventary')">
+                            <span class="icon">source</span>
+                            Inventary
+                        </button>
+                        <button 
+                            class="tech-btn"
+                            id="logoutBtn" 
+                            style="padding: 5px 15px; font-size: 14px;"
+                            onclick="showSection('reports')">
+                            <span class="icon">report</span>
+                            Reports
+                        </button>
+                    </div>
+                </nav>
 
-        </div>
+                <main id="content">
+                </main>
+            </div>
+            
+        </section>
+        <!-- Admin Screen: END -->
+        
     </main>
 
     
