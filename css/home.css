@@ -1,0 +1,77 @@
+#home{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+#homeContainer {
+    width: 94%;
+    height: 90%;
+    border: 2px #bc8926 solid;
+    border-radius: 25px;
+    background-color: #bc89262d;
+    display: flex;
+    flex-direction: column;
+}
+
+#homeContainer header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 30px;
+    height: 100px;
+}
+
+#homeContainer header img{
+    width: 110px;
+    height: 80px;
+}
+
+#homeContainer header h2{
+    color: #bc8926;
+    font-weight: 800;
+}
+
+#homeContainer header #userLogged{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#homeContainer header #userLogged #userTag {
+    color: #bc8926;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#homeContainer header #userLogged #username {
+    margin-left: 10px;
+    color: wheat;
+}
+
+#homeContainer nav{
+    background-color: #0000008d;
+    border-top: #bc8926 1px solid;
+    border-bottom: #bc8926 1px solid;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    height: 70px;
+}
+
+#homeContainer nav #menuContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 650px;
+}
+
+#homeContainer main{
+    width: 100%;
+    height: calc(100% - 100px - 70px);
+    padding: 20px;
+}

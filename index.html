@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="css/inventary.css">
+    <link rel="stylesheet" href="css/reports.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
@@ -17,51 +22,58 @@
         <!-- Login Screen: START -->
         <section id="container">
             <div id="containerLogin">
-                <h1>Wayne SecSystem</h1>
-                <button class="tech-btn" onclick="openModalLogin()">
+                <img src="./assets/img/logo.png" alt="">
+                <button class="tech-btn" onclick="toggleDisplays('#modalLogin', '#containerLogin')">
                     <span class="icon">login</span>
                     Login
                 </button>
             </div>
             <div id="modalLogin">
-                <form action="#">
-                    <label for="emailLogin">E-mail</label>
+                <img src="./assets/img/logo.png" alt="">
+                <form>
+                    <label for="emailLogin" class="labelForm">E-mail</label>
                     <div class="inputIcon">
-                        <span class="iconLogin">email</span>
-                        <input type="text" id="emailLogin" placeholder="E-mail"/>
+                        <span class="iconForm">email</span>
+                        <input type="email" class="inputForm" id="emailLogin" placeholder="E-mail" autocomplete="off" autofocus/>
                     </div>
                     
-                    <label for="passLogin">Password</label>
+                    <label for="passLogin" class="labelForm">Password</label>
                     <div class="inputIcon">
-                        <span class="iconLogin">password</span>
-                        <input type="password" id="passLogin" placeholder="Password"/>
+                        <span class="iconForm">password</span>
+                        <input type="password" class="inputForm" id="passLogin" placeholder="Password" />
                     </div>
 
                     <div id="loginBtn">
-                        <button class="tech-btn" type="submit" onclick="systemLogin()">
+                        <button class="tech-btn" type="button" onclick="systemLogin()">
                             <span class="icon">login</span>
                             Login
                         </button>
                     </div>
                 </form>
             </div>
-            <div class="modalErrorLogin" id="modalErrorEmptyLogin"></div>
-            <div class="modalErrorLogin" id="modalErrorLogin"></div>
+            <div id="modalErrorLogin"></div>
         </section>
         <!-- Login Screen: END -->
 
-        <!-- Admin Screen: START -->
-        <section id="adminDashboard">
-            <div id="dashboard">
+        <!-- Home: START -->
+        <section id="home">
+            <div id="homeContainer">
                 <header>
-                    <h2>Wayner SecSystem</h2>
+                    <img src="./assets/img/logo.png" alt="">
+                    <h2 id="homeTitle">Admin</h2>
                     <div id="userLogged">
-                        <p><span class="icon">person</span><strong>User: </strong>Admin</p>
+                        <div id="userTag">
+                            <span class="icon">person</span>
+                            <p>User:</p> <p id="username">Admin</p>
+                        </div>
                         <button 
                             class="tech-btn"
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
-                            onclick="logoutAdminDashboard()">
+                            onclick="{
+                                toggleDisplays('#container', '#home'),
+                                openModal('#dashboardModal')
+                            }">
                             <span class="icon">logout</span>
                             Logout
                         </button>
@@ -74,7 +86,7 @@
                             class="tech-btn"
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
-                            onclick="showSection('dashboard')">
+                            onclick="openModal('#dashboardModal')">
                             <span class="icon">dashboard</span>
                             Dashboard
                         </button>
@@ -82,7 +94,7 @@
                             class="tech-btn"
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
-                            onclick="showSection('users')">
+                            onclick="openModal('#userModal')">
                             <span class="icon">people</span>
                             Users
                         </button>
@@ -90,7 +102,7 @@
                             class="tech-btn"
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
-                            onclick="showSection('inventary')">
+                            onclick="openModal('#inventaryModal')">
                             <span class="icon">source</span>
                             Inventary
                         </button>
@@ -98,26 +110,162 @@
                             class="tech-btn"
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
-                            onclick="showSection('reports')">
+                            onclick="openModal('#reportsModal')">
                             <span class="icon">report</span>
                             Reports
                         </button>
                     </div>
                 </nav>
 
-                <main id="content">
+                <main id="homeContent">
+
+                    <!-- Dashboard Modal -->
+                    <section id="dashboardModal" class="mainModal">
+                        <div id="dashboardModalContent">
+
+                            <div class="dashboardCard"></div>
+                            <div class="dashboardCard"></div>
+                            <div class="dashboardCard"></div>
+
+                        </div>
+                    </section>
+
+
+                    <!-- User Modal -->
+                    <section id="userModal" class="mainModal">
+                        <div id="userModalContent">
+                            <div id="createUser">
+                                <button class="tech-btn" onclick="createUserModal()">
+                                    <span class="icon">person_add</span>
+                                    Add new user
+                                </button>
+                            </div>
+                            <div id="userTable">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 60px;">id</th>
+                                            <th style="min-width: 150px;">Name</th>
+                                            <th>E-mail</th>
+                                            <th style="width: 120px;">Role</th>
+                                            <th style="width: 250px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="userTableContent">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td style="display: flex;">
+                                                <button 
+                                                    class="tech-btn" 
+                                                    style="margin-right: 10px; font-size: 12px; padding: 5px 10px"
+                                                    onclick="createNewUser()">
+                                                        <span class="icon">update</span>
+                                                        Update
+                                                </button>
+                                                <button 
+                                                    class="tech-btn" 
+                                                    style="margin-right: 10px; font-size: 12px; padding: 5px 10px"
+                                                    onclick="removeUser()">
+                                                        <span class="icon">person_remove</span>
+                                                        Remove
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>                                
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Create User Modal -->
+                        <div id="createUserModal">
+                            <div id="createUserContainer">
+                                <h3 id="createUserTitle"><span class="icon">person_add</span>Create User</h3>
+                                <form>
+                                    <label for="userName" class="labelForm">Name:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">person</span>
+                                        <input type="text" id="userName" class="inputForm" placeholder="Enter name" autocomplete="off" autofocus required>
+                                    </div>
+
+                                    <label for="userEmail" class="labelForm">Email:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">email</span>
+                                        <input type="email" id="userEmail" class="inputForm" placeholder="Enter email" autocomplete="off" required>
+                                    </div>
+
+                                    <label for="userPassword" class="labelForm">Password:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">password</span>
+                                        <input type="password" id="userPassword" class="inputForm" placeholder="Enter password" autocomplete="off" required>
+                                    </div>
+
+                                    <label for="userRole" class="labelForm">Role:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">account_box</span>
+                                        <select id="userRole" class="inputForm" required>
+                                            <option value="" disabled selected>-- Select --</option>
+                                            <option value="user">User</option>
+                                            <option value="manager">Manager</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <div id="userButtons">
+                                    <button class="tech-btn"
+                                        id="addBtn"
+                                        style="margin-right: 20px;" 
+                                        onclick="createNewUser()">
+                                        <span class="icon">person_add</span>
+                                        Add
+                                    </button>
+                                    <button class="tech-btn" 
+                                        id="cancelBtn"
+                                        onclick="{
+                                            toggleDisplays('#userModalContent', '#createUserModal');
+                                            clearFormFields();
+                                        }">
+                                        <span class="icon">cancel</span>
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User Error Modal -->
+                        <div id="userErrorModal">
+                            <span id="iconAttention">error_outline</span>
+                            <p id="userErrorMsg" style="margin-bottom: 20px; color: #bc8926;"></p> 
+                            <button type="button" class="tech-btn" id="okErrorBtn"> OK </button>
+                        </div>
+                    </section>
+
+
+                    <!-- Inventary Modal -->
+                    <section id="inventaryModal" class="mainModal">
+                        <div id="inventaryContent">Inventary Modal</div>
+                    </section>
+
+
+                    <!-- Reports Modal -->
+                    <section id="reportsModal" class="mainModal">
+                        <div id="reportsModalContent">Reports Modal</div>
+                    </section>
+
                 </main>
             </div>
             
         </section>
-        <!-- Admin Screen: END -->
+        <!-- Home: END -->
         
     </main>
 
     
     <script src="js/script.js"></script>
-    <script src="js/resources.js"></script>
-    <script src="js/auth.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/user.js"></script>
     <script src="js/dashboard.js"></script>
 </body>
 </html>

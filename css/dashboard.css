@@ -1,61 +1,23 @@
-/* Admin Dashboard Style: START */
-
-#adminDashboard{
-    display: none;
-    width: 100vw;
-    height: 100vh;
+#dashboardModal {
+    display: flex;
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
-#dashboard {
-    width: 94%;
-    height: 90%;
-    border: 2px #bc8926 solid;
-    border-radius: 25px;
-    background-color: #bc89262d;
+#dashboardModalContent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    height: 100%;
+    gap: 20px;
 }
 
-#dashboard header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 15px;
-    border-radius: 10px;
-    padding: 5px 10px 5px 10px;
+.dashboardCard {
+    background-color: #0000009d;
+    border: #bc8926 1px solid;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
 }
-
-#dashboard header h2{
-    color: #bc8926;
-    font-weight: 800;
-}
-
-#dashboard header #userLogged{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#dashboard header #userLogged p{
-    color: #bc8926;
-    margin-bottom: 5px;
-}
-
-#dashboard nav{
-    background-color: #0000008d;
-    border-top: #bc8926 1px solid;
-    border-bottom: #bc8926 1px solid;
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-}
-
-#dashboard nav #menuContainer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 650px;
-}
-
-
-/* Admin Dashboard Style: START */

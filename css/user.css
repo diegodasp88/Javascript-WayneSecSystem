@@ -1,0 +1,115 @@
+#userModal{
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+#userModalContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#userModalContent #createUser{
+    height: 70px;
+    width: 100%;
+    background-color: #0000007d;
+    backdrop-filter: blur(4px);
+    border-top: #bc8926 1px solid;
+    border-bottom: #bc8926 1px solid;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#userModalContent #userTable{
+    height: calc(100% - 85px);
+    width: 100%;
+    background-color: #000000dd;
+    backdrop-filter: blur(4px);
+    border-top: #bc8926 1px solid;
+    border-bottom: #bc8926 1px solid;
+    overflow-y: auto;
+}
+
+#userModalContent #userTable table{
+    width: 100%;
+    overflow-y: auto;
+}
+
+#userModalContent #userTable table thead{
+    background-color: #bc8926;
+}
+
+#userModalContent #userTable table td{
+    background-color: #bc89262d;
+    padding: 5px 10px 5px 10px;
+    color: wheat;
+}
+
+
+/* Create User Modal */
+
+#createUserModal {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #000000de;
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+}
+
+#createUserModal #createUserContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    border: #bc8926 2px solid;
+    border-radius: 20px;
+    padding: 30px;
+    background-color: #bc89261d;
+}
+
+#createUserModal #createUserContainer h3{
+    width: 100%;
+    text-align: center;
+    background-color: #bc8926;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#createUserModal #createUserContainer form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#createUserModal #createUserContainer #userButtons{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Alert User Modal */
+
+#userErrorModal{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #000000de;
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
