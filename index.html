@@ -64,7 +64,7 @@
                     <div id="userLogged">
                         <div id="userTag">
                             <span class="icon">person</span>
-                            <p>User:</p> <p id="username">Admin</p>
+                            <p>User:</p> <p id="username">x</p>
                         </div>
                         <button 
                             class="tech-btn"
@@ -86,7 +86,11 @@
                             class="tech-btn"
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
-                            onclick="openModal('#dashboardModal')">
+                            onclick="{
+                                openModal('#dashboardModal', '.mainModal'),
+                                totalUsers(),
+                                generateRoleChart()
+                                }">
                             <span class="icon">dashboard</span>
                             Dashboard
                         </button>
@@ -94,7 +98,7 @@
                             class="tech-btn"
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
-                            onclick="openModal('#userModal')">
+                            onclick="{openModal('#userModal', '.mainModal'), loadUsers()}">
                             <span class="icon">people</span>
                             Users
                         </button>
@@ -102,38 +106,43 @@
                             class="tech-btn"
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
-                            onclick="openModal('#inventaryModal')">
+                            onclick="openModal('#inventaryModal', '.mainModal')">
                             <span class="icon">source</span>
                             Inventary
-                        </button>
-                        <button 
-                            class="tech-btn"
-                            id="logoutBtn" 
-                            style="padding: 5px 15px; font-size: 14px;"
-                            onclick="openModal('#reportsModal')">
-                            <span class="icon">report</span>
-                            Reports
                         </button>
                     </div>
                 </nav>
 
-                <main id="homeContent">
+                <div id="homeContent">
 
-                    <!-- Dashboard Modal -->
+                    <!-- Dashboard Modal: START -->
                     <section id="dashboardModal" class="mainModal">
                         <div id="dashboardModalContent">
 
-                            <div class="dashboardCard"></div>
-                            <div class="dashboardCard"></div>
-                            <div class="dashboardCard"></div>
+                            <!-- Users Card -->
+                            <div class="dashboardCard">
+                                <div class="cardTitle">
+                                    <h3>Users</h3>
+                                </div>
+                                <div id="totalContainer">
+                                    <p id="totalUsers"></p>
+                                    <h4>Total</h4>
+                                </div>
+                                <div id="userChartContainer">
+                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                    <canvas id="userChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="dashboardCard">
 
                         </div>
                     </section>
+                    <!-- Dashboard Modal: END -->
 
-
-                    <!-- User Modal -->
+                    <!-- User Modal: START -->
                     <section id="userModal" class="mainModal">
-                        <div id="userModalContent">
+                        <div id="userModalContent" class="userModal">
                             <div id="createUser">
                                 <button class="tech-btn" onclick="createUserModal()">
                                     <span class="icon">person_add</span>
@@ -180,7 +189,7 @@
                         </div>
 
                         <!-- Create User Modal -->
-                        <div id="createUserModal">
+                        <div id="createUserModal" class="userModal">
                             <div id="createUserContainer">
                                 <h3 id="createUserTitle"><span class="icon">person_add</span>Create User</h3>
                                 <form>
@@ -224,7 +233,7 @@
                                     <button class="tech-btn" 
                                         id="cancelBtn"
                                         onclick="{
-                                            toggleDisplays('#userModalContent', '#createUserModal');
+                                            openModal('#userModalContent', '.userModal');
                                             clearFormFields();
                                         }">
                                         <span class="icon">cancel</span>
@@ -235,26 +244,21 @@
                         </div>
 
                         <!-- User Error Modal -->
-                        <div id="userErrorModal">
-                            <span id="iconAttention">error_outline</span>
-                            <p id="userErrorMsg" style="margin-bottom: 20px; color: #bc8926;"></p> 
-                            <button type="button" class="tech-btn" id="okErrorBtn"> OK </button>
+                        <div id="userMsgModal" class="userModal">
+                            <span id="iconAttention"></span>
+                            <p id="userMsg" style="margin-bottom: 20px; color: #bc8926;"></p> 
+                            <button type="button" class="tech-btn" id="okBtn"> OK </button>
                         </div>
                     </section>
+                    <!-- User Modal: END -->
 
-
-                    <!-- Inventary Modal -->
+                    <!-- Inventary Modal: START -->
                     <section id="inventaryModal" class="mainModal">
                         <div id="inventaryContent">Inventary Modal</div>
                     </section>
+                    <!-- Inventary Modal: END -->
 
-
-                    <!-- Reports Modal -->
-                    <section id="reportsModal" class="mainModal">
-                        <div id="reportsModalContent">Reports Modal</div>
-                    </section>
-
-                </main>
+                </div>
             </div>
             
         </section>
@@ -264,7 +268,6 @@
 
     
     <script src="js/script.js"></script>
-    <script src="js/home.js"></script>
     <script src="js/user.js"></script>
     <script src="js/dashboard.js"></script>
 </body>

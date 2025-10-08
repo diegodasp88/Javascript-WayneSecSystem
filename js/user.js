@@ -1,9 +1,3 @@
-window.onclick = function (e) {
-    if (e.target == document.querySelector("#createUserModal")) {
-        toggleDisplays("#userModalContent", "#createUserModal");
-    }
-}
-
 // Clear all Create New Users' fields
 function clearFormFields() {
     userName.value = "";
@@ -11,6 +5,22 @@ function clearFormFields() {
     userPassword.value = "";
     userRole.value = "";
 }
+
+// Show error messages
+function showErrorMessage (msg) {
+    openModal("#userMsgModal", ".userModal");
+    document.querySelector("#iconAttention").textContent = "error_outline";
+    document.querySelector("#userMsg").textContent = msg;
+}
+
+// Show success messages
+function showSuccessMessage (msg) {
+    openModal("#userMsgModal", ".userModal");
+    document.querySelector("#iconAttention").textContent = "check";
+    document.querySelector("#userMsg").textContent = msg;
+    document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
+}
+
 
 async function loadUsers() {
     const url = "https://68d4a5c4214be68f8c69e247.mockapi.io/users";
@@ -50,10 +60,11 @@ async function loadUsers() {
 }
 loadUsers();
 
-function createUserModal() {
-    toggleDisplays('#createUserModal', '#userModalContent');
 
-    // Reset title and button
+function createUserModal() {
+    openModal('#createUserModal', '.userModal');
+
+    // Switch title and button to CREATE
     document.querySelector("#createUserTitle").innerHTML = `
         <span class="icon">person_add</span>Add New User
     `
@@ -62,10 +73,9 @@ function createUserModal() {
         <span class="icon">person_add</span>
         Add`;
     addBtn.onclick = createNewUser;
-
-    // Clean the form fields
     clearFormFields();
 }
+
 
 async function createNewUser() {
     const userName = document.querySelector("#userName");
@@ -73,38 +83,63 @@ async function createNewUser() {
     const userPassword = document.querySelector("#userPassword");
     const userRole = document.querySelector("#userRole");
 
-    // Local validation: no empty fields on user form
+    // No empty fields validation
     if ( userName.value.trim() == "" || 
          userEmail.value.trim() == "" || 
          userPassword.value.trim() == "" || 
-         userRole.value.trim() == "" ) {
+         userRole.value.trim() == "" 
+        ) {
+        showErrorMessage("Please fill in all the fields!")
+        document.querySelector("#okBtn").onclick = () => {openModal('#createUserModal', '.userModal');};
+        return; // stop
+    } 
 
-        toggleDisplays("#userErrorModal", "#createUserModal");
-        const userErrorMsg = document.querySelector("#userErrorMsg");
-        userErrorMsg.innerHTML = `Please fill in all the fields!`;
-        document.querySelector("#okErrorBtn").onclick = () => {
-            toggleDisplays('#createUserModal', '#userErrorModal');
-        }     
-    } else {
-        // Keep on creating a new user
-        const user = {
-            name: userName.value,
-            email: userEmail.value,
-            password: userPassword.value,
-            role: userRole.value
-        };
+    // Duplicate emails validation
+    const url = "https://68d4a5c4214be68f8c69e247.mockapi.io/users";
+    const response = await fetch(url);
 
-        const url = "https://68d4a5c4214be68f8c69e247.mockapi.io/users";
-        const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user)
-        });
-
-        clearFormFields();
-        toggleDisplays("#userModalContent", "#createUserModal");
-        loadUsers(); // load Users after creation
+    // Fetch from API validation
+    if(!response.ok) {
+        showErrorMessage(`Failed to fetch users from API: ${response.status} ${response.statusText}`)
+        document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
+        return; // stop
     }
+
+    // Continue duplicate e-mails validation
+    const checkingUsers = await response.json();
+    const checkingEmails = checkingUsers.some(
+        (user) => { return user.email.toLowerCase() === userEmail.value.toLowerCase()}
+    )
+    if (checkingEmails) {
+        showErrorMessage("This e-mail is already registered!")
+        document.querySelector("#okBtn").onclick = () => {openModal('#createUserModal', '.userModal');};
+        return; // stop
+    }
+
+    // Continue with user creation
+    const user = {
+        name: userName.value,
+        email: userEmail.value.toLowerCase(),
+        password: userPassword.value,
+        role: userRole.value
+    };
+
+    const creationResponse = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+    });
+
+    // Fetch validation
+    if (creationResponse.ok) {
+        showSuccessMessage("User successfully created!")
+    } else {
+        showErrorMessage(`Error while creating new user: ${creationResponse.status} ${creationResponse.statusText}`)
+        document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
+    }
+
+    clearFormFields();
+    loadUsers(); // load Users after creation
 }
 
 
@@ -112,20 +147,17 @@ async function removeUser(id) {
     const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/users/${id}`;
     const response = await fetch(url, { method: "DELETE" });
     if (response.ok) {
+        showSuccessMessage("User successfully removed!")
         loadUsers(); // load Users after exclusion
     } else {
-        toggleDisplays("#userErrorModal", "#userModalContent");
-        const userErrorMsg = document.querySelector("#userErrorMsg");
-        userErrorMsg.innerHTML = `An error occurred while removing the user. (${response.status} ${response.statusText})`;
-        document.querySelector("#okErrorBtn").onclick = () => {
-            toggleDisplays('#userModalContent', '#userErrorModal');
-        }            
+        showErrorMessage(`Error while removing user. (${response.status} ${response.statusText})`)
+        document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};          
     }
 }
 
 
 async function updateUserModal(id) {
-    toggleDisplays('#createUserModal', '#userModalContent');
+    openModal('#createUserModal', '.userModal');
 
     // Switching the modal title to Update User
     document.querySelector("#createUserTitle").innerHTML = `
@@ -138,13 +170,21 @@ async function updateUserModal(id) {
         Update`;
     addBtn.onclick = () => { updateUser(id) }
 
-    // Filling in all the fields with user data
+    // Filling in all the fields with selected user data
     const userName = document.querySelector("#userName");
     const userEmail = document.querySelector("#userEmail");
     const userRole = document.querySelector("#userRole");
     
     const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/users/${id}`;
     const response = await fetch(url);
+
+    // Fetch from API validation
+    if(!response.ok) {
+        showErrorMessage(`Failed to fetch users from API: ${response.status} ${response.statusText}`)
+        document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
+        return; // stop
+    }
+
     const user = await response.json();
 
     userName.value = user.name;
@@ -158,34 +198,54 @@ async function updateUser(id) {
     const userPassword = document.querySelector("#userPassword");
     const userRole = document.querySelector("#userRole");
 
-    // Local validation: no empty fields on user form
+    // No empty fields validation
     if ( userName.value.trim() == "" || 
          userEmail.value.trim() == "" ||
          userRole.value.trim() == "" ) {
-
-        toggleDisplays("#userErrorModal", "#createUserModal");
-        const userErrorMsg = document.querySelector("#userErrorMsg");
-        userErrorMsg.innerHTML = `Please fill in all the fields!`;
-        document.querySelector("#okErrorBtn").onclick = () => {
-            toggleDisplays('#createUserModal', '#userErrorModal');
-        }     
-    } else {
-        const user = {
-            name: userName.value,
-            email: userEmail.value,
-            password: userPassword.value,
-            role: userRole.value
-        };
-
-        const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/users/${id}`;
-        const response = await fetch(url, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user)
-        });
-
-        clearFormFields();
-        toggleDisplays("#userModalContent", "#createUserModal");
-        loadUsers(); // load Users after creation
+        showErrorMessage("Please fill in all the fields!");
+        document.querySelector("#okBtn").onclick = () => {openModal('#createUserModal', '.userModal');};
+        return;
     }
+
+    const user = {
+        name: userName.value,
+        email: userEmail.value.toLowerCase(),
+        role: userRole.value
+    };
+
+     // Empty password field = old password
+    if (userPassword.value.trim() !== "") {
+        user.password = userPassword.value;
+    };
+
+    // Duplicate e-mails validation
+    const checkurl = "https://68d4a5c4214be68f8c69e247.mockapi.io/users";
+    const checkresponse = await fetch(checkurl);
+    const checkingUsers = await checkresponse.json();
+    const checkingEmails = checkingUsers.some(
+        (user) => { return user.email.toLowerCase() === userEmail.value.toLowerCase()  && user.id != String(id)}
+    )
+    if (checkingEmails) {
+        showErrorMessage("This e-mail is already registered!")
+        document.querySelector("#okBtn").onclick = () => {openModal('#createUserModal', '.userModal');};
+        return; // stop
+    }
+
+    const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/users/${id}`;
+    const response = await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+    });
+
+    if (response.ok) {
+        showSuccessMessage("User successfully updated!")
+        loadUsers(); // load Users
+    } else {
+        showErrorMessage(`Error while updating user. (${response.status} ${response.statusText})`)
+        document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};         
+    }
+
+    clearFormFields();
+    loadUsers(); // load Users after creation
 }
