@@ -26,7 +26,7 @@
 }
 
 #userModalContent #userTable{
-    height: calc(100% - 85px);
+    height: 100%;
     width: 100%;
     background-color: #000000dd;
     backdrop-filter: blur(4px);
@@ -100,7 +100,7 @@
 }
 
 
-/* Alert User Modal */
+/* User Message Modal */
 
 #userMsgModal{
     display: none;

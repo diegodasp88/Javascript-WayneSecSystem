@@ -26,13 +26,13 @@
 
 .tech-btn:hover {
     color: #bc8926;
-    background: rgba(255, 208, 0, 0.3);
+    background: rgba(188, 137, 38, 0.5);
     box-shadow: 0 0 5px #bc8926, 0 0 5px #bc8926, 0 0 10px #bc8926;
 }
 
 .tech-btn:active {
     color: #bc8926;
-    background: rgba(255, 208, 0, 0.5);
+    background: rgba(188, 137, 38, 0.8);
     box-shadow: 0 0 5px #bc8926, 0 0 5px #bc8926, 0 0 10px #bc8926;
 }
 
@@ -147,7 +147,7 @@ body{
 /* Login Style: START */
 
 main #container{
-    display: none;
+    display: flex;
     margin-left: 10%;
     height: 100vh;
     width: 500px;

@@ -84,7 +84,6 @@
                     <div id="menuContainer">
                         <button 
                             class="tech-btn"
-                            id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
                             onclick="{
                                 openModal('#dashboardModal', '.mainModal'),
@@ -96,7 +95,6 @@
                         </button>
                         <button 
                             class="tech-btn"
-                            id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
                             onclick="{openModal('#userModal', '.mainModal'), loadUsers()}">
                             <span class="icon">people</span>
@@ -104,7 +102,6 @@
                         </button>
                         <button 
                             class="tech-btn"
-                            id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
                             onclick="openModal('#inventaryModal', '.mainModal')">
                             <span class="icon">source</span>
@@ -188,7 +185,7 @@
                             </div>
                         </div>
 
-                        <!-- Create User Modal -->
+                        <!-- Create User Modal: START -->
                         <div id="createUserModal" class="userModal">
                             <div id="createUserContainer">
                                 <h3 id="createUserTitle"><span class="icon">person_add</span>Create User</h3>
@@ -242,19 +239,145 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Create User Modal: END -->
 
-                        <!-- User Error Modal -->
+                        <!-- User Message Modal: START -->
                         <div id="userMsgModal" class="userModal">
                             <span id="iconAttention"></span>
                             <p id="userMsg" style="margin-bottom: 20px; color: #bc8926;"></p> 
                             <button type="button" class="tech-btn" id="okBtn"> OK </button>
                         </div>
+                        <!-- User Message Modal: END -->
+
                     </section>
                     <!-- User Modal: END -->
 
                     <!-- Inventary Modal: START -->
                     <section id="inventaryModal" class="mainModal">
-                        <div id="inventaryContent">Inventary Modal</div>
+                        <div id="inventaryModalContent" class="inventaryModal">
+                            <div id="createItem">
+                                <button class="tech-btn" onclick="createItemModal()">
+                                    <span class="icon">add_box</span>
+                                    Add new item
+                                </button>
+                            </div>
+
+                            <div id="inventaryTable">
+                                <div id="itemCardsContainer">
+                                    <!-- Item Cards Model: START -->
+                                    <div class="itemCards">
+                                        <div class="cardContainer1">
+                                            <img src="./assets/img/invent01.PNG" alt="item">
+                                            <div class="cardContainer2">
+                                                <div class="titleCard">Title</div>
+                                                <label>Catergory</label>
+                                                <div class="catCard textCard">Catergory</div>
+                                                <label>Security Level</label>
+                                                <div class="secLvlCard textCard">Sec. Level</div>
+                                            </div>
+                                        </div>                                        
+                                        <div class="descCard">Description</div>
+                                        <div class="btnCard">
+                                            <button 
+                                                class="tech-btn"
+                                                style="padding: 1px 10px; font-size: 10px;"
+                                                onclick="//">
+                                                <span class="icon" style="font-size: 12px;">update</span>
+                                                Update
+                                            </button>
+                                            <button 
+                                                class="tech-btn"
+                                                style="padding: 1px 10px; font-size: 10px;"
+                                                onclick="//">
+                                                <span class="icon" style="font-size: 12px;">remove</span>
+                                                Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- Item Cards Model: END -->
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- Create Item Modal: START -->
+                        <div id="createItemModal" class="inventaryModal">
+                            <div id="createItemContainer">
+                                <h3 id="createItemTitle"><span class="icon">add_box</span>Create Item</h3>
+                                <form>
+                                    <label for="itemName" class="labelForm">Name:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">dvr</span>
+                                        <input type="text" id="itemName" class="inputForm" placeholder="Enter name" autocomplete="off" autofocus required>
+                                    </div>
+
+                                    <label for="itemCat" class="labelForm">Category:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">category</span>
+                                        <input type="text" id="itemCat" class="inputForm" placeholder="Enter category" autocomplete="off" required>
+                                    </div>
+
+                                    <label for="itemDesc" class="labelForm">Description:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">description</span>
+                                        <input type="text" id="itemDesc" class="inputForm" placeholder="Enter short description" autocomplete="off" required>
+                                    </div>
+
+                                    <label for="itemSecLvl" class="labelForm">Security Level:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">security</span>
+                                        <select id="itemSecLvl" class="inputForm" required>
+                                            <option value="" disabled selected>-- Select --</option>
+                                            <option value="Low">Low</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="High">High</option>
+                                            <option value="Critical">Critical</option>
+                                            <option value="Confidential">Confidential</option>
+                                        </select>
+                                    </div>
+
+                                    <label for="itemStatus" class="labelForm">Status:</label>
+                                    <div class="inputIcon">
+                                        <span class="iconForm">toggle_on</span>
+                                        <select id="itemStatus" class="inputForm" required>
+                                            <option value="" disabled selected>-- Select --</option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                            <option value="In Testing">In Testing</option>
+                                            <option value="Restricted">Restricted</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <div id="itemButtons">
+                                    <button class="tech-btn"
+                                        id="addBtn"
+                                        style="margin-right: 20px;" 
+                                        onclick="createNewUser()">
+                                        <span class="icon">add_circle</span>
+                                        Create
+                                    </button>
+                                    <button class="tech-btn" 
+                                        id="cancelBtn"
+                                        onclick="{
+                                            openModal('#inventaryModalContent', '.inventaryModal');
+                                            clearItemsFormFields();
+                                        }">
+                                        <span class="icon">cancel</span>
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Create Item Modal: END -->
+
+                        <!-- Inventary Message Modal: START -->
+                        <div id="inventaryMsgModal" class="inventaryModal">
+                            <span id="iconAttention"></span>
+                            <p id="inventaryMsg" style="margin-bottom: 20px; color: #bc8926;"></p> 
+                            <button type="button" class="tech-btn" id="okBtn"> OK </button>
+                        </div>
+                        <!-- Inventary Message Modal: END -->
+
                     </section>
                     <!-- Inventary Modal: END -->
 
@@ -269,6 +392,7 @@
     
     <script src="js/script.js"></script>
     <script src="js/user.js"></script>
+    <script src="js/inventary.js"></script>
     <script src="js/dashboard.js"></script>
 </body>
 </html>

@@ -86,7 +86,6 @@ async function systemLogin() {
         // Showing user name and role on Home
         document.querySelector("#homeTitle").textContent = user.role.toUpperCase();
         document.querySelector("#username").textContent = user.name;
-
     }
 
 }

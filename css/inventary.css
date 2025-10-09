@@ -2,7 +2,213 @@
     display: none;
     width: 100%;
     height: 100%;
+    padding: 20px;
+}
+
+#inventaryModalContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#inventaryModalContent #createItem{
+    height: 70px;
+    width: 100%;
+    background-color: #0000007d;
+    backdrop-filter: blur(4px);
+    border-top: #bc8926 1px solid;
+    border-bottom: #bc8926 1px solid;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#inventaryTable {
+    height: 100%;
+    width: 100%;
+    background-color: #000000dd;
+    backdrop-filter: blur(4px);
+    border-top: #bc8926 1px solid;
+    border-bottom: #bc8926 1px solid;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#itemCardsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    max-width: 800px;
+    justify-content: center;
+}
+
+.itemCards {
+    width: 250px;
+    height: 220px;
+    background-color: #bc89261f;
+    border: 1px #bc8926 solid;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.itemCards:hover {
+    box-shadow: 0 0 15px #bc8926;
+    background: rgba(188, 137, 38, 0.2);
+    transition: 0.3s;
+}
+
+.itemCards label {
+    background-color: #bc8926;
+    padding: 0 5px 0 5px;
+    font-size: 8px;
+    border-radius: 3px 10px 3px 10px;
+    align-self: flex-start;
+    position: relative;
+}
+
+.itemCards img {
+    background-color: #bc89262f;
+    width: 90px;
+    height: 90px;
+    border-radius: 80px;
+    border: #bc8926 2px solid;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.itemCards .textCard {
+    width: 100%;
+    color: #f5deb39d;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.itemCards .cardContainer1 {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.itemCards .cardContainer2 {
+    width: 130px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itemCards .cardContainer2 .titleCard {
+    color: #bc8926;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: center;
+    border-bottom: #bc8926 1px solid;
+    font-size: 12px;
+}
+
+.itemCards .descCard{
+    border-top: #bc8926 1px solid;
+    border-bottom: #bc8926 1px solid;
+    padding: 5px;
+    color: #f5deb39d;
+    font-size: 10px;
+    height: 70px;
+}
+
+.itemCards .btnCard {
+    height: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 5px;
+}
+
+
+
+/* Create Item Modal  */
+
+#createItemModal {
+    display: none;
     align-items: center;
     justify-content: center;
-    color: #bc8926;
+    width: 100%;
+    height: 100%;
+    background-color: #000000de;
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+}
+
+#createItemModal #createItemContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    border: #bc8926 2px solid;
+    border-radius: 20px;
+    padding: 30px;
+    background-color: #bc89261d;
+}
+
+#createItemModal #createItemContainer h3{
+    width: 100%;
+    text-align: center;
+    background-color: #bc8926;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#createItemModal #createItemContainer form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#createItemModal #createItemContainer #itemButtons{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Alert User Modal */
+
+#userMsgModal{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #000000de;
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* User Message Modal */
+
+#inventaryMsgModal{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #000000de;
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

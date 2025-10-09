@@ -29,12 +29,10 @@ async function generateRoleChart() {
     const ctx = document.getElementById('userChart').getContext('2d');
 
     if (userChart) {
-        // 🔁 Atualiza o gráfico existente
         userChart.data.labels = labels;
         userChart.data.datasets[0].data = data;
         userChart.update();
     } else {
-        // 🆕 Cria o gráfico se ainda não existir
         userChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
