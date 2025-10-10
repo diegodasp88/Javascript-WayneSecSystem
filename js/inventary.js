@@ -26,8 +26,8 @@ async function loadInventary() {
     const response = await fetch(url);
     const inventaryData = await response.json();
 
-    const inventaryTable = document.querySelector("#inventaryTable");
-    inventaryTable.innerHTML = "";
+    const itemCardsContainer = document.querySelector("#itemCardsContainer");
+    itemCardsContainer.innerHTML = "";
 
     inventaryData.forEach(item => {
         const cardStructure = `
@@ -43,6 +43,10 @@ async function loadInventary() {
                     </div>
                 </div>                                        
                 <div class="descCard">${item.description}</div>
+                <div class="cardContainer3">
+                    <label>Status</label>
+                    <div class="statusCard textCard">${item.status}</div>
+                </div>
                 <div class="btnCard">
                     <button 
                         class="tech-btn"
@@ -61,11 +65,7 @@ async function loadInventary() {
                 </div>
             </div>
         `
-        inventaryTable.innerHTML += cardStructure;
+        itemCardsContainer.innerHTML += cardStructure;
     });
 }
 loadInventary();
-
-fetch("https://68d4a5c4214be68f8c69e247.mockapi.io/inventary")
-  .then(r => r.json())
-  .then(console.log)

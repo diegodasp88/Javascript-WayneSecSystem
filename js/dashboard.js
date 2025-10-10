@@ -46,7 +46,6 @@ async function generateRoleChart() {
                 }]
             },
             options: {
-                responsive: true,
                 plugins: {
                     legend: { 
                         position: 'bottom',

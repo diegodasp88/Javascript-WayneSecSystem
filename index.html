@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/user.css">
     <link rel="stylesheet" href="css/inventary.css">
-    <link rel="stylesheet" href="css/reports.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
@@ -256,7 +255,7 @@
                     <section id="inventaryModal" class="mainModal">
                         <div id="inventaryModalContent" class="inventaryModal">
                             <div id="createItem">
-                                <button class="tech-btn" onclick="createItemModal()">
+                                <button class="tech-btn" onclick="openModal('#createItemModal', '.inventaryModal')">
                                     <span class="icon">add_box</span>
                                     Add new item
                                 </button>
@@ -277,6 +276,10 @@
                                             </div>
                                         </div>                                        
                                         <div class="descCard">Description</div>
+                                        <div class="cardContainer3">
+                                            <label>Status</label>
+                                            <div class="statusCard textCard">Status</div>
+                                        </div>
                                         <div class="btnCard">
                                             <button 
                                                 class="tech-btn"
@@ -352,7 +355,7 @@
                                     <button class="tech-btn"
                                         id="addBtn"
                                         style="margin-right: 20px;" 
-                                        onclick="createNewUser()">
+                                        onclick="createNewItem()">
                                         <span class="icon">add_circle</span>
                                         Create
                                     </button>

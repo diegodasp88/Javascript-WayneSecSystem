@@ -192,6 +192,8 @@ async function updateUserModal(id) {
     userRole.value = user.role;
 }
 
+
+
 async function updateUser(id) {
     const userName = document.querySelector("#userName");
     const userEmail = document.querySelector("#userEmail");

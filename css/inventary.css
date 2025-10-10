@@ -40,7 +40,7 @@
 
 #itemCardsContainer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
     gap: 10px;
     height: 100%;
     width: 100%;
@@ -72,6 +72,7 @@
     border-radius: 3px 10px 3px 10px;
     align-self: flex-start;
     position: relative;
+    margin-right: 5px;
 }
 
 .itemCards img {
@@ -123,6 +124,12 @@
     color: #f5deb39d;
     font-size: 10px;
     height: 70px;
+}
+
+.itemCards .cardContainer3 {
+    display: flex;
+    border-bottom: #bc8926 1px solid;
+    margin-top: 5px;
 }
 
 .itemCards .btnCard {
