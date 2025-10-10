@@ -291,7 +291,7 @@
                                             <button 
                                                 class="tech-btn"
                                                 style="padding: 1px 10px; font-size: 10px;"
-                                                onclick="//">
+                                                onclick="removeItem()">
                                                 <span class="icon" style="font-size: 12px;">remove</span>
                                                 Remove
                                             </button>
@@ -323,7 +323,7 @@
                                     <label for="itemDesc" class="labelForm">Description:</label>
                                     <div class="inputIcon">
                                         <span class="iconForm">description</span>
-                                        <input type="text" id="itemDesc" class="inputForm" placeholder="Enter short description" autocomplete="off" required>
+                                        <textarea type="text" id="itemDesc" class="inputForm" placeholder="Enter short description" autocomplete="off" required></textarea>
                                     </div>
 
                                     <label for="itemSecLvl" class="labelForm">Security Level:</label>
@@ -353,7 +353,7 @@
                                 </form>
                                 <div id="itemButtons">
                                     <button class="tech-btn"
-                                        id="addBtn"
+                                        id="addItemBtn"
                                         style="margin-right: 20px;" 
                                         onclick="createNewItem()">
                                         <span class="icon">add_circle</span>
@@ -375,9 +375,9 @@
 
                         <!-- Inventary Message Modal: START -->
                         <div id="inventaryMsgModal" class="inventaryModal">
-                            <span id="iconAttention"></span>
+                            <span class="iconAttention"></span>
                             <p id="inventaryMsg" style="margin-bottom: 20px; color: #bc8926;"></p> 
-                            <button type="button" class="tech-btn" id="okBtn"> OK </button>
+                            <button type="button" class="tech-btn" id="okItemBtn"> OK </button>
                         </div>
                         <!-- Inventary Message Modal: END -->
 

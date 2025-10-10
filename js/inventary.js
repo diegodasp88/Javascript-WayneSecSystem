@@ -9,16 +9,16 @@ function clearItemsFormFields() {
 // Show error messages
 function inventaryErrorMessage (msg) {
     openModal("#inventaryMsgModal", ".inventaryModal");
-    document.querySelector("#iconAttention").textContent = "error_outline";
+    document.querySelector(".iconAttention").textContent = "error_outline";
     document.querySelector("#inventaryMsg").textContent = msg;
 }
 
 // Show success messages
 function inventarySuccessMessage (msg) {
     openModal("#inventaryMsgModal", ".inventaryModal");
-    document.querySelector("#iconAttention").textContent = "check";
+    document.querySelector(".iconAttention").textContent = "check";
     document.querySelector("#inventaryMsg").textContent = msg;
-    document.querySelector("#okBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};
+    document.querySelector("#okItemBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};
 }
 
 async function loadInventary() {
@@ -51,14 +51,14 @@ async function loadInventary() {
                     <button 
                         class="tech-btn"
                         style="padding: 1px 10px; font-size: 10px;"
-                        onclick="//">
+                        onclick="updateItem(${item.id})">
                         <span class="icon" style="font-size: 12px;">update</span>
                         Update
                     </button>
                     <button 
                         class="tech-btn"
                         style="padding: 1px 10px; font-size: 10px;"
-                        onclick="//">
+                        onclick="removeItem(${item.id})">
                         <span class="icon" style="font-size: 12px;">remove</span>
                         Remove
                     </button>
@@ -69,3 +69,81 @@ async function loadInventary() {
     });
 }
 loadInventary();
+
+
+
+function createItemModal() {
+    openModal('#createItemModal', '.inventaryModal');
+
+    document.querySelector("#createItemTitle").innerHTML = `
+        <span class="icon">add_box</span>Add New Item
+    `
+    const addItemBtn = document.querySelector("#addItemBtn");
+    addItemBtn.innerHTML = `
+        <span class="icon">add_circle</span>
+        Create`;
+    addItemBtn.onclick = createNewItem;
+    clearItemsFormFields();
+}
+
+
+
+async function createNewItem() {
+    const itemName = document.querySelector("#itemName");
+    const itemCat = document.querySelector("#itemCat");
+    const itemDesc = document.querySelector("#itemDesc");
+    const itemSecLvl = document.querySelector("#itemSecLvl");
+    const itemStatus = document.querySelector("#itemStatus");
+
+    // No empty fields validation
+    if ( itemName.value.trim() == "" || 
+         itemCat.value.trim() == "" || 
+         itemDesc.value.trim() == "" || 
+         itemSecLvl.value.trim() == "" ||
+         itemStatus.value.trim() == ""
+        ) {
+        inventaryErrorMessage("Please fill in all the fields!")
+        document.querySelector("#okItemBtn").onclick = () => {openModal('#createItemModal', '.inventaryModal');};
+        return; // stop
+    } 
+
+    const item = {
+        name: itemName.value,
+        category: itemCat.value,
+        description: itemDesc.value,
+        sec_level: itemSecLvl.value,
+        status: itemStatus.value,
+        img: "./assets/img/newitem.PNG"
+    };
+
+    const url = "https://68d4a5c4214be68f8c69e247.mockapi.io/inventary";
+    const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item)
+    });
+
+    // Fetch validation
+    if (response.ok) {
+        inventarySuccessMessage("Item successfully created!")
+        clearItemsFormFields();
+        loadInventary();
+    } else {
+        inventaryErrorMessage(`Error while creating new user: ${response.status} ${response.statusText}`)
+        document.querySelector("#okItemBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};
+    }
+}
+
+
+
+async function removeItem(id) {
+    const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/inventary/${id}`;
+    const response = await fetch(url, { method: "DELETE" });
+    if (response.ok) {
+        inventarySuccessMessage("Item successfully removed!")
+        loadInventary();
+    } else {
+        inventaryErrorMessage(`Error while removing item. (${response.status})`)
+        document.querySelector("#okItemBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};          
+    }
+}

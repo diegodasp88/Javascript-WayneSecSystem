@@ -40,11 +40,9 @@
 
 #itemCardsContainer {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(5, auto);
     gap: 10px;
-    height: 100%;
     width: 100%;
-    max-width: 800px;
     justify-content: center;
 }
 
@@ -87,7 +85,7 @@
 
 .itemCards .textCard {
     width: 100%;
-    color: #f5deb39d;
+    color: #f6c874c1;
     font-size: 10px;
     margin-bottom: 5px;
 }
@@ -121,7 +119,7 @@
     border-top: #bc8926 1px solid;
     border-bottom: #bc8926 1px solid;
     padding: 5px;
-    color: #f5deb39d;
+    color: #f6c874c1;
     font-size: 10px;
     height: 70px;
 }
@@ -137,6 +135,30 @@
     display: flex;
     justify-content: space-evenly;
     margin-top: 5px;
+}
+
+@media (max-width: 650px) {
+    #itemCardsContainer {
+        grid-template-columns: repeat(1, auto);
+    }
+}
+
+@media (min-width: 650px) and (max-width: 930px) {
+    #itemCardsContainer {
+        grid-template-columns: repeat(2, auto);
+    }
+}
+
+@media (min-width: 930px) and (max-width: 1200px) {
+    #itemCardsContainer {
+        grid-template-columns: repeat(3, auto);
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1500px) {
+    #itemCardsContainer {
+        grid-template-columns: repeat(4, auto);
+    }
 }
 
 
@@ -187,6 +209,11 @@
 #createItemModal #createItemContainer #itemButtons{
     display: flex;
     justify-content: center;
+}
+
+#createItemModal #createItemContainer form #itemDesc{
+    font-size: 12px;
+    height: 60px;
 }
 
 

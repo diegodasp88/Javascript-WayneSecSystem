@@ -9,14 +9,14 @@ function clearFormFields() {
 // Show error messages
 function UserErrorMessage (msg) {
     openModal("#userMsgModal", ".userModal");
-    document.querySelector("#iconAttention").textContent = "error_outline";
+    document.querySelector(".iconAttention").textContent = "error_outline";
     document.querySelector("#userMsg").textContent = msg;
 }
 
 // Show success messages
 function UserSuccessMessage (msg) {
     openModal("#userMsgModal", ".userModal");
-    document.querySelector("#iconAttention").textContent = "check";
+    document.querySelector(".iconAttention").textContent = "check";
     document.querySelector("#userMsg").textContent = msg;
     document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
 }
@@ -133,13 +133,12 @@ async function createNewUser() {
     // Fetch validation
     if (creationResponse.ok) {
         UserSuccessMessage("User successfully created!")
+        clearFormFields();
+        loadUsers();
     } else {
         UserErrorMessage(`Error while creating new user: ${creationResponse.status} ${creationResponse.statusText}`)
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
     }
-
-    clearFormFields();
-    loadUsers(); // load Users after creation
 }
 
 
@@ -147,10 +146,10 @@ async function removeUser(id) {
     const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/users/${id}`;
     const response = await fetch(url, { method: "DELETE" });
     if (response.ok) {
-        UserSuccessMessage("User successfully removed!")
+        UserSuccessMessage("User successfully removed!");
         loadUsers(); // load Users after exclusion
     } else {
-        UserErrorMessage(`Error while removing user. (${response.status} ${response.statusText})`)
+        UserErrorMessage(`Error while removing user. (${response.status} ${response.statusText})`);
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};          
     }
 }

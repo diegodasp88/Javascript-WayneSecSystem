@@ -65,7 +65,7 @@
     font-family: "Bruno Ace SC", sans-serif;
     font-weight: 500;
     font-size: 15px;
-    color: wheat;
+    color: #f6c874c1;
     background-color: black;
     padding: 15px 15px 10px 45px;
     border-radius: 5px 20px 5px 20px;
@@ -117,7 +117,7 @@
     z-index: 2;
 }
 
-.modalError #iconAttention {
+.iconAttention {
     margin-right: 10px;
     font-family: 'Material Icons';
     font-weight: normal;
