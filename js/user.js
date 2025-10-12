@@ -64,7 +64,7 @@ loadUsers();
 function createUserModal() {
     openModal('#createUserModal', '.userModal');
 
-    // Switch title and button to CREATE
+    // Switch title and button into CREATE
     document.querySelector("#createUserTitle").innerHTML = `
         <span class="icon">person_add</span>Add New User
     `
@@ -136,7 +136,7 @@ async function createNewUser() {
         clearFormFields();
         loadUsers();
     } else {
-        UserErrorMessage(`Error while creating new user: ${creationResponse.status} ${creationResponse.statusText}`)
+        UserErrorMessage(`Error while creating new user: ${creationResponse.status}`)
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
     }
 }
@@ -149,7 +149,7 @@ async function removeUser(id) {
         UserSuccessMessage("User successfully removed!");
         loadUsers(); // load Users after exclusion
     } else {
-        UserErrorMessage(`Error while removing user. (${response.status} ${response.statusText})`);
+        UserErrorMessage(`Error while removing user: ${response.status}`);
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};          
     }
 }
@@ -179,7 +179,7 @@ async function updateUserModal(id) {
 
     // Fetch from API validation
     if(!response.ok) {
-        UserErrorMessage(`Failed to fetch users from API: ${response.status} ${response.statusText}`)
+        UserErrorMessage(`Failed to fetch users from API: ${response.status}`)
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
         return; // stop
     }
@@ -243,7 +243,7 @@ async function updateUser(id) {
         UserSuccessMessage("User successfully updated!")
         loadUsers(); // load Users
     } else {
-        UserErrorMessage(`Error while updating user. (${response.status} ${response.statusText})`)
+        UserErrorMessage(`Error while updating user: ${response.status}`)
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};         
     }
 

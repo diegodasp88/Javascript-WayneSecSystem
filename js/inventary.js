@@ -51,7 +51,7 @@ async function loadInventary() {
                     <button 
                         class="tech-btn"
                         style="padding: 1px 10px; font-size: 10px;"
-                        onclick="updateItem(${item.id})">
+                        onclick="updateItemModal(${item.id})">
                         <span class="icon" style="font-size: 12px;">update</span>
                         Update
                     </button>
@@ -129,7 +129,7 @@ async function createNewItem() {
         clearItemsFormFields();
         loadInventary();
     } else {
-        inventaryErrorMessage(`Error while creating new user: ${response.status} ${response.statusText}`)
+        inventaryErrorMessage(`Error while creating new user: ${response.status}`)
         document.querySelector("#okItemBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};
     }
 }
@@ -145,5 +145,95 @@ async function removeItem(id) {
     } else {
         inventaryErrorMessage(`Error while removing item. (${response.status})`)
         document.querySelector("#okItemBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};          
+    }
+}
+
+
+// Function to open Update Item Modal and fill all the fields with its data
+async function updateItemModal(id) {
+    openModal('#createItemModal', '.inventaryModal');
+
+    // Switching the modal title to Update Item
+    document.querySelector("#createItemTitle").innerHTML = `
+        <span class="icon">update</span>Update Item
+    `
+    // Switching button to Update and its onclick function
+    const addItemBtn = document.querySelector("#addItemBtn")
+    addItemBtn.innerHTML = `
+        <span class="icon">update</span>
+        Update`;
+    addItemBtn.onclick = () => { updateItem(id) }
+
+    // Filling in all the fields with selected item data
+    const itemName = document.querySelector("#itemName");
+    const itemCat = document.querySelector("#itemCat");
+    const itemDesc = document.querySelector("#itemDesc");
+    const itemSecLvl = document.querySelector("#itemSecLvl");
+    const itemStatus = document.querySelector("#itemStatus");
+    
+    const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/inventary/${id}`;
+    const response = await fetch(url);
+
+    // Fetch from API validation
+    if(!response.ok) {
+        inventaryErrorMessage(`Failed to fetch items from API: ${response.status}`)
+        document.querySelector("#okItemBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};
+        return; // stop
+    }
+
+    const item = await response.json();
+
+    itemName.value = item.name;
+    itemCat.value = item.category;
+    itemDesc.value = item.description;
+    itemSecLvl.value = item.sec_level;
+    itemStatus.value = item.status;
+}
+
+
+
+async function updateItem(id) {
+    const itemName = document.querySelector("#itemName");
+    const itemCat = document.querySelector("#itemCat");
+    const itemDesc = document.querySelector("#itemDesc");
+    const itemSecLvl = document.querySelector("#itemSecLvl");
+    const itemStatus = document.querySelector("#itemStatus");
+
+    // No empty fields validation
+    if ( itemName.value.trim() == "" || 
+         itemCat.value.trim() == "" || 
+         itemDesc.value.trim() == "" || 
+         itemSecLvl.value.trim() == "" ||
+         itemStatus.value.trim() == ""
+        ) {
+        inventaryErrorMessage("Please fill in all the fields!")
+        document.querySelector("#okItemBtn").onclick = () => {openModal('#createItemModal', '.inventaryModal');};
+        return; // stop
+    } 
+
+    const item = {
+        name: itemName.value,
+        category: itemCat.value,
+        description: itemDesc.value,
+        sec_level: itemSecLvl.value,
+        status: itemStatus.value,
+        img: "./assets/img/newitem.PNG"
+    };
+
+    const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/inventary/${id}`;
+    const response = await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item)
+    });
+
+    // Fetch validation
+    if (response.ok) {
+        inventarySuccessMessage("Item successfully updated!")
+        clearItemsFormFields();
+        loadInventary();
+    } else {
+        inventaryErrorMessage(`Error while updating item: ${response.status}`)
+        document.querySelector("#okItemBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};
     }
 }

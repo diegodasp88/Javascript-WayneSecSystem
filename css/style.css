@@ -139,8 +139,9 @@ body{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
+    min-height: 900px;
     font-family: "Bruno Ace SC", sans-serif;
 }
 
@@ -152,6 +153,7 @@ main #container{
     height: 100vh;
     width: 500px;
     background: rgba(255, 208, 0, 0.05);
+    backdrop-filter: blur(4px);
     border-left: 2px solid #bc89267d;
     border-right: 2px solid #bc89267d;
 }

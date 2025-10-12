@@ -8,12 +8,11 @@
 }
 
 #dashboardModalContent {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 100%;
     gap: 20px;
-    max-width: 1200px;
 }
 
 .dashboardCard {
@@ -26,9 +25,10 @@
     justify-content: flex-start;
     align-items: center;
     padding: 15px;
+    min-height: 520px;
 }
 
-.cardTitle {
+.headerCard {
     background-color: #bc8926;
     width: 100%;
     color: black;
@@ -41,27 +41,86 @@
     margin-bottom: 30px;
 }
 
-#userChartContainer {
-    margin-top: 30px;
-    overflow: visible;
+.bodyCard {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-#userChart {
+.bodyCard aside{
     width: 250px;
-    height: 250px;
-}
-
-#totalContainer {
-    color: #bc8926;
-    width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.bodyCard aside p {
+    color: #bc8926;
+    font-size: 6rem;
+    font-weight: bold;
+}
+
+.bodyCard aside span {
+    width: 250px;
+    text-align: center;
+    color: #bc8926;
     padding-bottom: 20px;
+    border-bottom: #bc8926 1px solid;
+    margin-bottom: 30px;
+}
+
+.bodyCard aside canvas {
+    width: 250px;
+}
+
+.bodyCard #inventaryCards {
+    margin-left: 20px;
+    border-left: #bc8926 2px solid;
+    padding-left: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.tinyCards {
+    width: 130px;
+    height: 150px;
+    border: #bc8926 1px solid;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #bc89261f;
+}
+
+.tinyCards:hover {
+    box-shadow: 0 0 10px #bc8926;
+    background: rgba(188, 137, 38, 0.2);
+    transition: 0.3s;
+}
+
+.tinyCards img {
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+    border-color: #bc8926 1px solid;
+    margin-bottom: 5px;
+}
+
+.tinyCards p {
+    width: 100%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    font-size: 12px;
+    color: #bc8926;
+    border-top: #bc8926 1px solid;
     border-bottom: #bc8926 1px solid;
 }
 
-#totalContainer p{
-    font-size: 6rem;
-    font-weight: 800;
+.tinyCards span {
+    padding-top: 2px;
+    color: #f5deb3d0;
+    font-size: 10px;
 }

@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- charts -->
     <title>Wayne SecSystem</title>
 </head>
 <body>
@@ -86,8 +87,7 @@
                             style="padding: 5px 15px; font-size: 14px;"
                             onclick="{
                                 openModal('#dashboardModal', '.mainModal'),
-                                totalUsers(),
-                                generateRoleChart()
+                                callAllDashFunctions()
                                 }">
                             <span class="icon">dashboard</span>
                             Dashboard
@@ -115,23 +115,40 @@
                     <section id="dashboardModal" class="mainModal">
                         <div id="dashboardModalContent">
 
-                            <!-- Users Card -->
+                            <!-- Users dashboard -->
                             <div class="dashboardCard">
-                                <div class="cardTitle">
+                                <div class="headerCard">
                                     <h3>Users</h3>
                                 </div>
-                                <div id="totalContainer">
-                                    <p id="totalUsers"></p>
-                                    <h4>Total</h4>
-                                </div>
-                                <div id="userChartContainer">
-                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                                    <canvas id="userChart"></canvas>
+                                <div class="bodyCard">
+                                    <aside>
+                                        <p id="totalUsers"></p>
+                                        <span>Total</span>
+                                        <canvas id="userChart"></canvas>
+                                    </aside>
                                 </div>
                             </div>
 
+                            <!-- Inventary dashboard -->
                             <div class="dashboardCard">
-
+                                <div class="headerCard">
+                                    <h3>Inventary</h3>
+                                </div>
+                                <div class="bodyCard">
+                                    <aside>
+                                        <p id="totalItems"></p>
+                                        <span>Items</span>
+                                        <canvas id="inventaryChart"></canvas>
+                                    </aside>
+                                    <div id="inventaryCards">
+                                        <div class="tinyCards">
+                                            <img src="#" alt="">
+                                            <p>Name</p>
+                                            <span>Status</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </section>
                     <!-- Dashboard Modal: END -->
@@ -284,7 +301,7 @@
                                             <button 
                                                 class="tech-btn"
                                                 style="padding: 1px 10px; font-size: 10px;"
-                                                onclick="//">
+                                                onclick="updateItemModal()">
                                                 <span class="icon" style="font-size: 12px;">update</span>
                                                 Update
                                             </button>
@@ -392,7 +409,7 @@
         
     </main>
 
-    
+
     <script src="js/script.js"></script>
     <script src="js/user.js"></script>
     <script src="js/inventary.js"></script>

@@ -20,7 +20,7 @@ async function systemLogin() {
         toggleDisplays("#modalErrorLogin", "#modalLogin");
         modalErrorLogin.innerHTML = `
             <span id="iconAttention">error_outline</span>
-            <p style="margin-bottom: 20px; color: #bc8926;">Please insert your e-mail!</p>
+            <p style="margin-bottom: 20px; color: #bc8926;">Please insert an e-mail!</p>
             <button 
                 type="button" 
                 class="tech-btn" 
