@@ -36,6 +36,8 @@
     padding: 20px;
     display: flex;
     justify-content: center;
+    scrollbar-width: thin;
+    scrollbar-color: #bc8926 #00000030;
 }
 
 #itemCardsContainer {

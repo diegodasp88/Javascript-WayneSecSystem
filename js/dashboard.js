@@ -107,9 +107,17 @@ async function dashLoadItems() {
     }));
 
     const itemCard = document.querySelector("#inventaryCards");
+    itemCard.innerHTML = "";
+
     itemsArray.forEach(item => {
-        const itemCard = `
+        const tinyCardStructure = `
+            <div class="tinyCards">
+                <img src="${item.img}" alt="">
+                <p>${item.name}</p>
+                <span>${item.status}</span>
+            </div>
         `
+        itemCard.innerHTML += tinyCardStructure;
     });
 
     return itemsArray; 
