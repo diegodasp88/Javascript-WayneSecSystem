@@ -37,7 +37,7 @@ async function loadUsers() {
                 <td>${user.name}</td>
                 <td>${user.email}</td>
                 <td style="text-align: center">${user.role}</td>
-                <td style="display: flex;">
+                <td style="display: flex;" id="btnUser">
                     <button 
                         class="tech-btn" 
                         style="margin-right: 10px; font-size: 12px; padding: 5px 10px"

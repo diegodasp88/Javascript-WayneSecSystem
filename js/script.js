@@ -84,8 +84,19 @@ async function systemLogin() {
         passLogin.value = "";
 
         // Showing user name and role on Home
-        document.querySelector("#homeTitle").textContent = user.role.toUpperCase();
-        document.querySelector("#username").textContent = user.name;
+        const showUserRole = document.querySelector("#homeTitle").textContent = user.role.toUpperCase();
+        const showUserName = document.querySelector("#username").textContent = user.name;
+
+        // Authorization for USERS: Access only the dashboard
+        if (showUserRole === "USER") {
+            document.querySelector("#menuContainer").style.visibility = "hidden";
+        }
+
+        // Authorization for MANAGERS: Cannot create either users nor items
+        if (showUserRole === "MANAGER") {
+            document.querySelector("#createUser").style.visibility = "hidden";
+            document.querySelector("#createItem").style.visibility = "hidden";
+        }
     }
 
 }
