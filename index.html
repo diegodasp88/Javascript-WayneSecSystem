@@ -20,7 +20,7 @@
 
     <main>
         <!-- Login Screen: START -->
-        <section id="container">
+        <section id="login">
             <div id="containerLogin">
                 <img src="./assets/img/logo.png" alt="">
                 <button class="tech-btn" onclick="toggleDisplays('#modalLogin', '#containerLogin')">
@@ -71,7 +71,7 @@
                             id="logoutBtn" 
                             style="padding: 5px 15px; font-size: 14px;"
                             onclick="{
-                                toggleDisplays('#container', '#home'),
+                                toggleDisplays('#login', '#home'),
                                 openModal('#dashboardModal')
                             }">
                             <span class="icon">logout</span>
@@ -259,8 +259,8 @@
 
                         <!-- User Message Modal: START -->
                         <div id="userMsgModal" class="userModal">
-                            <span id="iconAttention"></span>
-                            <p id="userMsg" style="margin-bottom: 20px; color: #bc8926;"></p> 
+                            <span class="iconAttention"></span>
+                            <p id="userMsg" style="margin-bottom: 20px; color: #bc8926;"></p>
                             <button type="button" class="tech-btn" id="okBtn"> OK </button>
                         </div>
                         <!-- User Message Modal: END -->

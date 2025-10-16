@@ -6,15 +6,15 @@ function clearFormFields() {
     userRole.value = "";
 }
 
-// Show error messages
-function UserErrorMessage (msg) {
+// Show error message
+function userErrorMessage (msg) {
     openModal("#userMsgModal", ".userModal");
     document.querySelector(".iconAttention").textContent = "error_outline";
     document.querySelector("#userMsg").textContent = msg;
 }
 
-// Show success messages
-function UserSuccessMessage (msg) {
+// Show success message
+function userSuccessMessage (msg) {
     openModal("#userMsgModal", ".userModal");
     document.querySelector(".iconAttention").textContent = "check";
     document.querySelector("#userMsg").textContent = msg;
@@ -89,7 +89,7 @@ async function createNewUser() {
          userPassword.value.trim() == "" || 
          userRole.value.trim() == "" 
         ) {
-        UserErrorMessage("Please fill in all the fields!")
+        userErrorMessage("Please fill in all the fields!")
         document.querySelector("#okBtn").onclick = () => {openModal('#createUserModal', '.userModal');};
         return; // stop
     } 
@@ -100,7 +100,7 @@ async function createNewUser() {
 
     // Fetch from API validation
     if(!response.ok) {
-        UserErrorMessage(`Failed to fetch users from API: ${response.status} ${response.statusText}`)
+        userErrorMessage(`Failed to fetch users from API: ${response.status} ${response.statusText}`)
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
         return; // stop
     }
@@ -111,7 +111,7 @@ async function createNewUser() {
         (user) => { return user.email.toLowerCase() === userEmail.value.toLowerCase()}
     )
     if (checkingEmails) {
-        UserErrorMessage("This e-mail is already registered!")
+        userErrorMessage("This e-mail is already registered!")
         document.querySelector("#okBtn").onclick = () => {openModal('#createUserModal', '.userModal');};
         return; // stop
     }
@@ -132,11 +132,11 @@ async function createNewUser() {
 
     // Fetch validation
     if (creationResponse.ok) {
-        UserSuccessMessage("User successfully created!")
+        userSuccessMessage("User successfully created!")
         clearFormFields();
         loadUsers();
     } else {
-        UserErrorMessage(`Error while creating new user: ${creationResponse.status}`)
+        userErrorMessage(`Error while creating new user: ${creationResponse.status}`)
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
     }
 }
@@ -146,10 +146,10 @@ async function removeUser(id) {
     const url = `https://68d4a5c4214be68f8c69e247.mockapi.io/users/${id}`;
     const response = await fetch(url, { method: "DELETE" });
     if (response.ok) {
-        UserSuccessMessage("User successfully removed!");
+        userSuccessMessage("User successfully removed!");
         loadUsers(); // load Users after exclusion
     } else {
-        UserErrorMessage(`Error while removing user: ${response.status}`);
+        userErrorMessage(`Error while removing user: ${response.status}`);
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};          
     }
 }
@@ -179,7 +179,7 @@ async function updateUserModal(id) {
 
     // Fetch from API validation
     if(!response.ok) {
-        UserErrorMessage(`Failed to fetch users from API: ${response.status}`)
+        userErrorMessage(`Failed to fetch users from API: ${response.status}`)
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};
         return; // stop
     }
@@ -203,7 +203,7 @@ async function updateUser(id) {
     if ( userName.value.trim() == "" || 
          userEmail.value.trim() == "" ||
          userRole.value.trim() == "" ) {
-        UserErrorMessage("Please fill in all the fields!");
+        userErrorMessage("Please fill in all the fields!");
         document.querySelector("#okBtn").onclick = () => {openModal('#createUserModal', '.userModal');};
         return;
     }
@@ -227,7 +227,7 @@ async function updateUser(id) {
         (user) => { return user.email.toLowerCase() === userEmail.value.toLowerCase()  && user.id != String(id)}
     )
     if (checkingEmails) {
-        UserErrorMessage("This e-mail is already registered!")
+        userErrorMessage("This e-mail is already registered!")
         document.querySelector("#okBtn").onclick = () => {openModal('#createUserModal', '.userModal');};
         return; // stop
     }
@@ -240,10 +240,10 @@ async function updateUser(id) {
     });
 
     if (response.ok) {
-        UserSuccessMessage("User successfully updated!")
+        userSuccessMessage("User successfully updated!")
         loadUsers(); // load Users
     } else {
-        UserErrorMessage(`Error while updating user: ${response.status}`)
+        userErrorMessage(`Error while updating user: ${response.status}`)
         document.querySelector("#okBtn").onclick = () => {openModal('#userModalContent', '.userModal');};         
     }
 

@@ -51,19 +51,27 @@ async function systemLogin() {
 
         const user = usersData.find((e) => {return e.email === email && e.password === password});
     
+        // Authorization for each user roles
         if (user) {
             switch (user.role) {
                 case "admin":
                     toggleDisplays("#containerLogin", "#modalLogin");
-                    toggleDisplays("#home", "#container");
+                    toggleDisplays("#home", "#login");
+                    document.querySelector("#menuContainer").style.visibility = "visible";
+                    document.querySelector("#createUser").style.display = "flex";
+                    document.querySelector("#createItem").style.display = "flex";
                     break;
                 case "manager":
                     toggleDisplays("#containerLogin", "#modalLogin");
-                    toggleDisplays("#home", "#container");
+                    toggleDisplays("#home", "#login");
+                    document.querySelector("#menuContainer").style.visibility = "visible";
+                    document.querySelector("#createUser").style.display = "none"; // not allowed to create users
+                    document.querySelector("#createItem").style.display = "none"; // not allowed to create items
                     break;
                 case "user":
                     toggleDisplays("#containerLogin", "#modalLogin");
-                    toggleDisplays("#home", "#container");
+                    toggleDisplays("#home", "#login");
+                    document.querySelector("#menuContainer").style.visibility = "hidden"; // only allowed to access the dashboard
                     break;
             }
         } else {
@@ -86,17 +94,6 @@ async function systemLogin() {
         // Showing user name and role on Home
         const showUserRole = document.querySelector("#homeTitle").textContent = user.role.toUpperCase();
         const showUserName = document.querySelector("#username").textContent = user.name;
-
-        // Authorization for USERS: Access only the dashboard
-        if (showUserRole === "USER") {
-            document.querySelector("#menuContainer").style.visibility = "hidden";
-        }
-
-        // Authorization for MANAGERS: Cannot create either users nor items
-        if (showUserRole === "MANAGER") {
-            document.querySelector("#createUser").style.visibility = "hidden";
-            document.querySelector("#createItem").style.visibility = "hidden";
-        }
     }
 
 }

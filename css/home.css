@@ -1,16 +1,18 @@
 #home{
     display: none;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     min-width: 600px;
-    overflow-x: hidden;
+    min-height: auto;
+    overflow: hidden;
+    padding: 20px;
 }
 
 #homeContainer {
-    width: 94%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     border: 2px #bc8926 solid;
     border-radius: 25px;
     background-color: #bc89262d;
@@ -74,6 +76,7 @@
 
 #homeContent {
     width: 100%;
-    height: calc(100% - 100px - 70px);
+    height: 100%;
     padding: 20px;
+    overflow-y: auto;
 }
