@@ -52,9 +52,10 @@ O **Wayne SecSystem** é um sistema desenvolvido como **projeto de conclusão de
 2. Abra o arquivo `index.html` diretamente no navegador.  
 3. Utilize as credenciais abaixo para o primeiro acesso:
 
-Email: admin@email.com
-Senha: 12345
-
+```
+📧 Email: admin@email.com
+🔑 Senha: 12345
+```
 
 > ⚠️ O projeto utiliza o **MockAPI** para armazenar e manipular dados de forma simulada — não há banco de dados real.
 
@@ -74,7 +75,7 @@ O sistema possui diferentes níveis de autorização que determinam o acesso às
 
 ### 📦 Estrutura do projeto
 
-/
+```
 ├── index.html
 ├── /css
 │ ├── style.css --> classes gerais e estilização do body e main
@@ -90,7 +91,7 @@ O sistema possui diferentes níveis de autorização que determinam o acesso às
 │ └── inventary.js --> lógica do CRUD de itens do inventário
 └── /assets
   └── /img --> contém todas as imagens do sistema
-
+```
 ---
 
 ### 📄 Status do projeto
@@ -167,7 +168,7 @@ The system has different access levels defining user permissions:
 
 ### 📦 Project structure
 
-/
+```
 ├── index.html
 ├── /css
 │ ├── style.css --> general classes and base layout
@@ -183,7 +184,7 @@ The system has different access levels defining user permissions:
 │ └── inventary.js --> inventory CRUD logic
 └── /assets
   └── /img --> contains all system images
-
+```
 ---
 
 ### 📄 Project status
