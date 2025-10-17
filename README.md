@@ -6,7 +6,7 @@
 
 <p align="center">
   <em>🇧🇷: Um sistema fictício desenvolvido para aprimorar a segurança da Wayne Industries e proteger Gotham City.<br>
-  _🇺🇸: A fictional system developed to enhance the security of Wayne Industries and protect Gotham City._</em>
+  🇺🇸: A fictional system developed to enhance the security of Wayne Industries and protect Gotham City.</em>
 </p>
 
 ---
@@ -147,8 +147,10 @@ Projeto desenvolvido com fins educacionais para conclusão de curso.
 2. Open the `index.html` file directly in your browser.  
 3. Use the credentials below for the first login:
 
-Email: admin@email.com
-Password: 12345
+```
+📧 Email: admin@email.com
+🔑 Password: 12345
+```
 
 > ⚠️ The project uses **MockAPI** to store and handle data in a simulated environment — there is no real database.
 
