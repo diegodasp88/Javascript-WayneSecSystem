@@ -6,7 +6,7 @@
 
 <p align="center">
   <em>🇧🇷: Um sistema fictício desenvolvido para aprimorar a segurança da Wayne Industries e proteger Gotham City.<br>
-  _🇺🇸: A fictional system developed to enhance the security of Wayne Industries and protect Gotham City._</em>
+  🇺🇸: A fictional system developed to enhance the security of Wayne Industries and protect Gotham City.</em>
 </p>
 
 ---
@@ -52,9 +52,10 @@ O **Wayne SecSystem** é um sistema desenvolvido como **projeto de conclusão de
 2. Abra o arquivo `index.html` diretamente no navegador.  
 3. Utilize as credenciais abaixo para o primeiro acesso:
 
-Email: admin@email.com
-Senha: 12345
-
+```
+📧 Email: admin@email.com
+🔑 Senha: 12345
+```
 
 > ⚠️ O projeto utiliza o **MockAPI** para armazenar e manipular dados de forma simulada — não há banco de dados real.
 
@@ -74,7 +75,7 @@ O sistema possui diferentes níveis de autorização que determinam o acesso às
 
 ### 📦 Estrutura do projeto
 
-/
+```
 ├── index.html
 ├── /css
 │ ├── style.css --> classes gerais e estilização do body e main
@@ -90,7 +91,7 @@ O sistema possui diferentes níveis de autorização que determinam o acesso às
 │ └── inventary.js --> lógica do CRUD de itens do inventário
 └── /assets
   └── /img --> contém todas as imagens do sistema
-
+```
 ---
 
 ### 📄 Status do projeto
@@ -146,8 +147,10 @@ Projeto desenvolvido com fins educacionais para conclusão de curso.
 2. Open the `index.html` file directly in your browser.  
 3. Use the credentials below for the first login:
 
-Email: admin@email.com
-Password: 12345
+```
+📧 Email: admin@email.com
+🔑 Password: 12345
+```
 
 > ⚠️ The project uses **MockAPI** to store and handle data in a simulated environment — there is no real database.
 
@@ -167,7 +170,7 @@ The system has different access levels defining user permissions:
 
 ### 📦 Project structure
 
-/
+```
 ├── index.html
 ├── /css
 │ ├── style.css --> general classes and base layout
@@ -183,7 +186,7 @@ The system has different access levels defining user permissions:
 │ └── inventary.js --> inventory CRUD logic
 └── /assets
   └── /img --> contains all system images
-
+```
 ---
 
 ### 📄 Project status
