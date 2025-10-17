@@ -9,14 +9,14 @@ function clearItemsFormFields() {
 // Show error messages
 function inventaryErrorMessage (msg) {
     openModal("#inventaryMsgModal", ".inventaryModal");
-    document.querySelector(".iconAttention").textContent = "error_outline";
+    document.querySelector("#iconMsg").textContent = "error_outline";
     document.querySelector("#inventaryMsg").textContent = msg;
 }
 
 // Show success messages
 function inventarySuccessMessage (msg) {
     openModal("#inventaryMsgModal", ".inventaryModal");
-    document.querySelector(".iconAttention").textContent = "check";
+    document.querySelector("#iconMsg").textContent = "check";
     document.querySelector("#inventaryMsg").textContent = msg;
     document.querySelector("#okItemBtn").onclick = () => {openModal('#inventaryModalContent', '.inventaryModal');};
 }

@@ -1,3 +1,4 @@
+// DOM manipulation function to switch display status
 function toggleDisplays(idOpen, idClose){
     document.querySelector(idOpen).style.display = "flex";
     document.querySelector(idClose).style.display = "none";
@@ -91,7 +92,7 @@ async function systemLogin() {
         emailLogin.value = "";
         passLogin.value = "";
 
-        // Showing user name and role on Home
+        // Showing user name and role on Home (main page)
         const showUserRole = document.querySelector("#homeTitle").textContent = user.role.toUpperCase();
         const showUserName = document.querySelector("#username").textContent = user.name;
     }
@@ -100,10 +101,10 @@ async function systemLogin() {
 
 // Open Modals
 function openModal(modalId, modalClass) {
-    // get all modals with the class "mainModal"
+    // get all modals with the selected class
     const modals = document.querySelectorAll(modalClass);
 
-    // close all modals
+    // close all modals with this same class
     modals.forEach( (modal) => { return modal.style.display = "none" });
 
     // open only the one desired
